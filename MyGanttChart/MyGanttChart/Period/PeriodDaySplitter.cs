@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyGanttChart
+{
+    public class PeriodDaySplitter : PeriodSplitter
+    {
+        public PeriodDaySplitter(DateTime min, DateTime max)
+            : base(min, max)
+        { }
+
+        public override List<Period> Split()
+        {
+            var precedingBreak = min.Date;
+            return base.Split(precedingBreak);
+        }
+
+        protected override DateTime Increase(DateTime date, int value)
+        {
+            return date.AddDays(value);
+        }
+    }
+}

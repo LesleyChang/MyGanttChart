@@ -15,7 +15,7 @@ namespace MyGanttChart
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window w = new MainWindow();
+            Window w = new UserControl_Gantt();
             w.Show();
             base.OnStartup(e);
         }

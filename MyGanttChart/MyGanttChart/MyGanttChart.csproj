@@ -55,7 +55,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GanttChartData.cs" />
-    <Compile Include="GanttRowPanel.cs" />
     <Compile Include="Period\Period.cs" />
     <Compile Include="Period\PeriodDaySplitter.cs" />
     <Compile Include="Period\PeriodHourSplitter.cs" />

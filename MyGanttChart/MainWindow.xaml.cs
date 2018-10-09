@@ -23,6 +23,48 @@ namespace MyGanttChart
         public MainWindow()
         {
             InitializeComponent();
+            CreateData(DateTime.Now, DateTime.Now.AddDays(20));
+        }
+        private void CreateData(DateTime minDate, DateTime maxDate)
+        {
+            // Set max and min dates
+            ganttControl1.Initialize(minDate, maxDate);
+
+            // Create timelines and define how they should be presented
+            ganttControl1.CreateTimeLine(new PeriodYearSplitter(minDate, maxDate), FormatYear);
+            ganttControl1.CreateTimeLine(new PeriodMonthSplitter(minDate, maxDate), FormatMonth);
+            var gridLineTimeLine = ganttControl1.CreateTimeLine(new PeriodDaySplitter(minDate, maxDate), FormatDay);
+            
+
+            // Set the timeline to atatch gridlines to
+            ganttControl1.SetGridLinesTimeline(gridLineTimeLine, DetermineBackground);
+
+        }
+        private Brush DetermineBackground(TimeLineItem timeLineItem)
+        {
+            if (timeLineItem.End.Date.DayOfWeek == DayOfWeek.Saturday || timeLineItem.End.Date.DayOfWeek == DayOfWeek.Sunday)
+                return new SolidColorBrush(Colors.LightBlue);
+            else
+                return new SolidColorBrush(Colors.Transparent);
+        }
+        private string FormatYear(Period period)
+        {
+            return period.Start.Year.ToString();
+        }
+
+        private string FormatMonth(Period period)
+        {
+            return period.Start.Month.ToString();
+        }
+
+        private string FormatDay(Period period)
+        {
+            return period.Start.Day.ToString();
+        }
+
+        private string FormatDayName(Period period)
+        {
+            return period.Start.DayOfWeek.ToString();
         }
     }
 }
